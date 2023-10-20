@@ -1,0 +1,52 @@
+# Compiled Object files
+*.o
+*.obj
+
+# Compiled Dynamic Libraries (shared objects)
+*.so
+*.dll
+
+# Compiled Static Libraries
+*.a
+*.lib
+
+# CMake build directory
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeScripts.vc/
+
+# Qt-specific files
+moc_*.cpp
+ui_*.h
+CMakeLists.txt.user
+CMakeUserPresets.json
+CMakeUserPresets.vc.json
+CMakeUserPresets.txt
+CMakeUserOptions.cmake
+CMakeUserOptions.txt
+CMakeUserOptions.vc.cmake
+
+# IDE-specific files
+.idea/
+.vscode/
+*.user
+*.suo
+*.sdf
+*.opendb
+
+# Build outputs
+build/
+Makefile
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+
+# Ignore user-specific build settings
+CMakeUserPresets/
+CMakeUserOptions/
+
+# Ignore generated files
+GeneratedFiles/
+GeneratedFiles_Debug/
+GeneratedFiles_Release/

@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.26"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "k_mean",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "k_mean::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-k_mean-Debug-54e55269dc197d3bbb32.json",
+					"name" : "k_mean",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "k_mean_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-k_mean_autogen-Debug-5c1f4686ad592117d8cd.json",
+					"name" : "k_mean_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "k_mean_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-k_mean_autogen_timestamp_deps-Debug-11d39ce9e4748617a137.json",
+					"name" : "k_mean_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/oreste/CLionProjects/k_mean/cmake-build-debug",
+		"source" : "/home/oreste/CLionProjects/k_mean"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 5
+	}
+}

@@ -38,8 +38,6 @@ CMakeUserOptions.vc.cmake
 # Build outputs
 build/
 Makefile
-CMakeCache.txt
-CMakeFiles/
 cmake_install.cmake
 
 # Ignore user-specific build settings
@@ -50,3 +48,15 @@ CMakeUserOptions/
 GeneratedFiles/
 GeneratedFiles_Debug/
 GeneratedFiles_Release/
+# Ignore CMake-generated build artifacts
+cmake-build-debug/
+
+
+# Ignore Ninja build files
+.ninja_deps
+.ninja_log
+
+k_mean_autogen/
+
+# Ignore temporary and testing files
+Testing/

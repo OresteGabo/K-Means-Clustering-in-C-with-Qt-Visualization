@@ -29,6 +29,7 @@ private:
     //points represente les habitants
     vector<Position*>points;
     vector<Centroid*>centroids;
+    //vector<QColor> colors;
 
 
     //In this function we will generate a random population of size number, where each Position(point) has values between maxWidth, maxHeight
@@ -40,6 +41,7 @@ private:
     //this function will take all the generated centroids, and in their points vector, add generated random population
     //it will add a point in a centroid if that centroid is the closest to that point
     void distributePoints();
+    std::vector<QColor> generateColors();
 };
 
 

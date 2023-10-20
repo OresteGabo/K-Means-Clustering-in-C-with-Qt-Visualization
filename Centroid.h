@@ -33,7 +33,7 @@ public:
 
     void setPoints(const vector<Position *> &points);
 
-    int getColor()const;
+
     string toString()const;
     void clear();
 private:
@@ -41,9 +41,6 @@ private:
     static int getRandomNumber(int min,int max);
     vector<Position*>points;
     void generateNewCentroidPosition();
-
-
-
 };
 
 

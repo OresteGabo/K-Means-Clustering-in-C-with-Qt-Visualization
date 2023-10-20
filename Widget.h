@@ -29,7 +29,6 @@ private:
     void dessineCentroid(QPainter&, Centroid *);
     void dessinePosition(QPainter&, Position *);
     void dessineCentroids(QPainter&, const vector<Centroid*>& km);
-    void dessinePositions(QPainter&, const vector<Position*>& km);
     void dessineKMean(QPainter&,const KMean&);
     void init();
     void associatePositionsToCentroids();

@@ -44,32 +44,48 @@ void Widget::init(){
     QPushButton* playBtn=new QPushButton("Play");
     QLabel* populationLabel=new QLabel("");  // Label to display the K-Mean population
 }
+/*
 void Widget::dessineCentroid(QPainter& paint,Centroid* c){
 
-    paint.setPen(Qt::red); // Set the pen color to red
+    paint.setPen(c->getColor()); // Set the pen color to red
     paint.drawRect(c->getX() - 5, c->getY() - 5, 10, 10);
+    for(int x=0;x<c->getPoints().size();x++){
+        dessinePosition(paint,c->getPoints()[x]);
+    }
     paint.setPen(Qt::black);
 }
 void Widget::dessinePosition(QPainter& paint,Position* p){
     paint.drawEllipse(p->getX()-3,p->getY()-3,6,6);
+}*/
+
+void Widget::dessineCentroid(QPainter& paint, Centroid* c) {
+    // Set the brush color to the centroid's color
+    paint.setBrush(c->getColor());
+
+    // Draw a filled ellipse for the centroid
+    paint.drawRect(c->getX() - 5, c->getY() - 5, 10, 10);
+
+
+
+    for (int x = 0; x < c->getPoints().size(); x++) {
+        dessinePosition(paint, c->getPoints()[x]);
+    }
+    // Reset the brush color to black
+    //paint.setBrush(Qt::black);
 }
+
+void Widget::dessinePosition(QPainter& paint, Position* p) {
+    paint.drawEllipse(p->getX() - 3, p->getY() - 3, 6, 6);
+}
+
+
+
 void Widget::dessineCentroids(QPainter& paint, const vector<Centroid*>& km){
-    paint.setPen(Qt::red);
     for(int x=0;x<km.size();x++){
         dessineCentroid(paint,km[x]);
-        for(int y=0;y<km[x]->getPoints().size();y++){
-            dessinePosition(paint,km[x]->getPoints()[y]);
-        }
     }
-    paint.setPen(Qt::black);
 }
-void Widget::dessinePositions(QPainter& paint, const vector<Position*>& km){
-    paint.setPen(Qt::darkBlue);
-    for(int x=0;x<km.size();x++){
-        dessinePosition(paint,km[x]);
-    }
-    paint.setPen(Qt::black);
-}
+
 void Widget::dessineKMean(QPainter& p,const KMean& km){
     dessineCentroids(p,km.getCentroids());
 }

@@ -34,11 +34,29 @@ vector<Centroid*> KMean::generateRandomCentroids(int number, int maxWidth, int m
     vector<Centroid*> centroids;
     for (int i = 0; i < number; i++) {
         Centroid* newCentroid = new Centroid(maxWidth, maxHeight);
+        newCentroid->setColor(generateColors()[i]);
         centroids.push_back(newCentroid);
     }
     return centroids;
 }
+std::vector<QColor> KMean::generateColors() {
+    std::vector<QColor> colorVector;
 
+    // Add some common colors to the vector
+    colorVector.push_back(QColor(255, 0, 0));        // Red
+    colorVector.push_back(QColor(0, 255, 0));        // Green
+    colorVector.push_back(QColor(0, 0, 255));        // Blue
+    colorVector.push_back(QColor(255, 255, 0));      // Yellow
+    colorVector.push_back(QColor(255, 0, 255));      // Magenta
+    colorVector.push_back(QColor(0, 255, 255));      // Cyan
+    colorVector.push_back(QColor(255, 165, 0));      // Orange
+    colorVector.push_back(QColor(128, 0, 128));      // Purple
+    colorVector.push_back(QColor(0, 128, 128));      // Teal
+    colorVector.push_back(QColor(255, 192, 203));    // Pink
+    colorVector.push_back(QColor(0, 0, 0));          // Black
+    colorVector.push_back(QColor(128, 128, 128));    // Gray
+    return colorVector;
+}
 // Function to distribute points to the closest centroids
 void KMean::distributePoints() {
     for (Position* point : points) {

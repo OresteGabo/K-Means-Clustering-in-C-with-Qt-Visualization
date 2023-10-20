@@ -1,5 +1,0 @@
-/home/oreste/CLionProjects/k_mean/cmake-build-debug/CMakeFiles/k_mean.dir
-/home/oreste/CLionProjects/k_mean/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/oreste/CLionProjects/k_mean/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/oreste/CLionProjects/k_mean/cmake-build-debug/CMakeFiles/k_mean_autogen_timestamp_deps.dir
-/home/oreste/CLionProjects/k_mean/cmake-build-debug/CMakeFiles/k_mean_autogen.dir

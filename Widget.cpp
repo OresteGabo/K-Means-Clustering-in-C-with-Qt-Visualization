@@ -1,17 +1,17 @@
 // Widget.cpp
 #include "Widget.h"
 #include <QPainter>
-
-Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent) ,d_kmean(kmean){
-    //resize(900,500);
+Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent), d_kmean(kmean) {
     init();
     associatePositionsToCentroids();
+
     mainLayout = new QVBoxLayout(this);
 
-
-
-    // Create the horizontal layout for buttons
+    // Create a horizontal layout for buttons
     buttonLayout = new QHBoxLayout;
+
+    // Add an empty stretch to push buttons to the right
+    buttonLayout->addStretch(1);
 
     // Create the "Play" button with a small size
     playBtn = new QPushButton("Play");
@@ -21,19 +21,26 @@ Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent) ,d_kmean(kmean){
     // Create the "Reset" button with a small size
     resetBtn = new QPushButton("Reset");
     resetBtn->setMaximumWidth(50); // Adjust the width as needed
+    infos=new QLabel("EMPTY");
     connect(resetBtn, &QPushButton::clicked, this, &Widget::onReset);
 
-    // Add stretch to push buttons to the bottom right
-    buttonLayout->addStretch(1);
+    // Add the buttons to the right within the horizontal layout
+    buttonLayout->addWidget(infos);
     buttonLayout->addWidget(playBtn);
     buttonLayout->addWidget(resetBtn);
 
-    // Add the button layout to the main layout
+    // Add an empty stretch within the vertical layout to push buttons to the bottom
+    mainLayout->addStretch(1);
+
+    // Add the horizontal button layout within the vertical layout
     mainLayout->addLayout(buttonLayout);
 
     // Add the main layout to the widget
     setLayout(mainLayout);
 }
+
+
+
 
 void Widget::paintEvent(QPaintEvent *event){
     QPainter paint{this};
@@ -75,7 +82,7 @@ void Widget::dessineKMean(QPainter& p,const KMean& km){
 }
 void Widget::onPlay() {
     d_kmean.setCentroidsPositionToMean();
-    cout<<"On play clicked"<<endl;
+    associatePositionsToCentroids();
     update();
 }
 QSize Widget::sizeHint() const {
@@ -104,7 +111,11 @@ void Widget::associatePositionsToCentroids() {
             }
         }
         closestCentroid->push_back(position);
-        //closestCentroid->getPoints().push_back(position);
     }
+    //QString information=QString("");
+    //for(int x=0;x<d_kmean.getCentroids().size();x++){
+        //information+= "Centroid N:"+QString::number(x)+" has :"+QString::number(d_kmean.getCentroids()[x]->getPoints().size())+" popuation :";
+    //}
+    //infos->setText("");
 }
 

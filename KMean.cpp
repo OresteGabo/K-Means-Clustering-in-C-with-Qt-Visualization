@@ -8,7 +8,7 @@
 KMean::KMean(int populationSize, int numCentroids, int maxCoordinateX, int maxCoordinateY) {
     // Initialize and generate the population and centroids
     points = generateRandomPopulation(populationSize, maxCoordinateX, maxCoordinateY);
-    centroids = generateRandomCentroids(3, maxCoordinateX, maxCoordinateY);
+    centroids = generateRandomCentroids(numCentroids, maxCoordinateX, maxCoordinateY);
 
     // Distribute the points among the centroids
     //distributePoints();

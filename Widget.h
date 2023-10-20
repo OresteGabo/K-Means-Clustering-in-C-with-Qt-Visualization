@@ -40,6 +40,7 @@ private:
     QHBoxLayout *buttonLayout; // Horizontal layout for buttons
     QPushButton *playBtn;
     QPushButton *resetBtn; // Add a "Reset" button
+    QLabel* infos;
 
 private slots:
     void onPlay();

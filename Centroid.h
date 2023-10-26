@@ -32,10 +32,12 @@ public:
     const vector<Position *> &getPoints() const;
 
     void setPoints(const vector<Position *> &points);
+    bool operator==(const Centroid&)const;
 
 
-    string toString()const;
+
     void clear();
+
 private:
     //random nber generator from cplusplus.com
     static int getRandomNumber(int min,int max);

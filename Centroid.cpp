@@ -5,8 +5,6 @@
 #include "Centroid.h"
 #include "Centroid.h"
 
-
-
 // Default constructor
 Centroid::Centroid() : Position(generateRandomPosition()) {
     std::cout << "Centroid created with Centroid() " << Position::toString() << std::endl;
@@ -70,5 +68,20 @@ void Centroid::setPoints(const vector<Position *> &points) {
 }
 void Centroid::clear(){
     points.clear();
+}
+/**
+ * This equal operator return true when the 2 centroids are in the same position
+ * !!! WARNING !!! whether their points are the same of different doenst matter!
+ * @param c
+ * @return
+ */
+bool Centroid::operator==(const Centroid & c) const {
+    if(c.getPoints().size()==points.size())
+        return false;
+    for(int x=0;x<points.size();x++){
+        if(c.points[x]->getX() != points[x]->getX()) return false;
+        if(c.points[x]->getY() != points[x]->getY()) return false;
+    }
+    return true;
 }
 

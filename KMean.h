@@ -22,6 +22,8 @@ public:
     virtual ~KMean();
     const std::vector<Position*>& getPoints()const;
     const std::vector<Centroid*>& getCentroids()const;
+    void init();
+
 
 protected:
 
@@ -30,6 +32,15 @@ private:
     vector<Position*>points;
     vector<Centroid*>centroids;
     //vector<QColor> colors;
+    void emptyCentroids();
+    void emptyPoints();
+    void regenerateCentroids();
+    void regeneratePoints();
+
+    int initialCentroidsSize;
+    int initialPopulationSize;
+    int maxCoordinateX;
+    int maxCoordinateY;
 
 
     //In this function we will generate a random population of size number, where each Position(point) has values between maxWidth, maxHeight

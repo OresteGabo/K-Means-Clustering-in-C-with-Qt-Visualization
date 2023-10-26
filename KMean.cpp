@@ -5,10 +5,14 @@
 #include "KMean.h"
 
 // Implementation for KMean constructor
-KMean::KMean(int populationSize, int numCentroids, int maxCoordinateX, int maxCoordinateY) {
+KMean::KMean(int populationSize, int numCentroids, int maxX, int maxY) {
+    initialCentroidsSize=numCentroids;
+    initialPopulationSize=populationSize;
+    maxCoordinateX=maxX;
+    maxCoordinateY=maxY;
+
     // Initialize and generate the population and centroids
-    points = generateRandomPopulation(populationSize, maxCoordinateX, maxCoordinateY);
-    centroids = generateRandomCentroids(numCentroids, maxCoordinateX, maxCoordinateY);
+    init();
 
     // Distribute the points among the centroids
     //distributePoints();
@@ -94,4 +98,30 @@ void KMean::setCentroidPositionToMean(Centroid*c){
     }
     c->setX(x/c->getPoints().size());
     c->setY(y/c->getPoints().size());
+}
+
+void KMean::emptyCentroids(){
+    cout<<"EMPTY CENTROIDS"<<endl;
+    centroids.resize(0);
+}
+void KMean::emptyPoints(){
+    cout<<"EMPTY POINTS"<<endl;
+    points.resize(0);
+}
+void KMean::regenerateCentroids(){
+    cout<<"regenerate CENTROIDS"<<endl;
+    centroids = generateRandomCentroids(initialCentroidsSize, maxCoordinateX, maxCoordinateY);
+
+}
+void KMean::regeneratePoints(){
+    cout<<"regenerate POINTS"<<endl;
+    points = generateRandomPopulation(initialPopulationSize, maxCoordinateX, maxCoordinateY);
+
+}
+void KMean::init(){
+    emptyCentroids();
+    emptyPoints();
+    regenerateCentroids();
+    regeneratePoints();
+
 }

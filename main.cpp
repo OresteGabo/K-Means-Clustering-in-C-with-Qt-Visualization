@@ -3,15 +3,18 @@
 #include "KMean.h"
 #include <QDesktopWidget>
 
+#include <QScreen>
+
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    QDesktopWidget *desktop = QApplication::desktop();
-    int screenWidth = desktop->screenGeometry().width();
-    int screenHeight = desktop->screenGeometry().height();
+    QScreen *screen = QGuiApplication::primaryScreen(); // Get the primary screen
+    int screenWidth = screen->availableGeometry().width();
+    int screenHeight = screen->availableGeometry().height();
+
 
     // Create an instance of the KMean class with random centroids
-    KMean kmean(500, 5, screenWidth-150, screenHeight-150);
+    KMean kmean(5000, 5, screenWidth-150, screenHeight-150);
 
     // Create the Widget and pass the KMean object to it
     Widget widget(kmean);

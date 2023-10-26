@@ -1,8 +1,31 @@
 // Widget.cpp
 #include "Widget.h"
 #include <QPainter>
+#include <thread>
+
 Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent), d_kmean(kmean) {
     init();
+}
+
+
+
+void Widget::updateInfosLabel(){
+    string s="";
+    for(int x=0;x<d_kmean.getCentroids().size();x++){
+        s=s+"("+std::to_string(d_kmean.getCentroids()[x]->getX())+","+std::to_string(d_kmean.getCentroids()[x]->getY())+")["+std::to_string(d_kmean.getCentroids()[x]->getPoints().size())+"]  ";
+    }
+    infos->setText(QString::fromStdString(s));
+
+}
+void Widget::paintEvent(QPaintEvent *event){
+    QPainter paint{this};
+
+    dessineKMean(paint,d_kmean);
+}
+void Widget::init(){
+    //playBtn=new QPushButton("Play");
+    QLabel* populationLabel=new QLabel("");  // Label to display the K-Mean population
+
     associatePositionsToCentroids();
 
     mainLayout = new QVBoxLayout(this);
@@ -22,6 +45,7 @@ Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent), d_kmean(kmean) 
     resetBtn = new QPushButton("Reset");
     resetBtn->setMaximumWidth(50); // Adjust the width as needed
     infos=new QLabel("EMPTY");
+    updateInfosLabel();
     connect(resetBtn, &QPushButton::clicked, this, &Widget::onReset);
 
     // Add the buttons to the right within the horizontal layout
@@ -36,20 +60,12 @@ Widget::Widget(KMean& kmean, QWidget* parent) : QWidget(parent), d_kmean(kmean) 
     mainLayout->addLayout(buttonLayout);
 
     // Add the main layout to the widget
-    setLayout(mainLayout);
-}
+    if(this->layout() != nullptr){
+        setLayout(mainLayout);
+    }
 
 
 
-
-void Widget::paintEvent(QPaintEvent *event){
-    QPainter paint{this};
-
-    dessineKMean(paint,d_kmean);
-}
-void Widget::init(){
-    QPushButton* playBtn=new QPushButton("Play");
-    QLabel* populationLabel=new QLabel("");  // Label to display the K-Mean population
 }
 void Widget::dessineCentroid(QPainter& paint, Centroid* c) {
     // Set the brush color to the centroid's color
@@ -68,29 +84,79 @@ void Widget::dessineCentroid(QPainter& paint, Centroid* c) {
 }
 
 void Widget::dessinePosition(QPainter& paint, Position* p) {
-    paint.drawEllipse(p->getX() - 3, p->getY() - 3, 6, 6);
+    paint.drawEllipse(p->getX() - 2, p->getY() - 2, 3, 3);
 }
 
 void Widget::dessineCentroids(QPainter& paint, const vector<Centroid*>& km){
+
+
     for(int x=0;x<km.size();x++){
         dessineCentroid(paint,km[x]);
     }
+    dessinePositionLines(paint);
 }
 
 void Widget::dessineKMean(QPainter& p,const KMean& km){
     dessineCentroids(p,km.getCentroids());
+
 }
 void Widget::onPlay() {
-    d_kmean.setCentroidsPositionToMean();
-    associatePositionsToCentroids();
-    update();
+        d_kmean.setCentroidsPositionToMean();
+        associatePositionsToCentroids();
+        updateInfosLabel();
+        update();
+}
+
+void Widget::dessinePositionLines(QPainter& painter){
+    for(int x=0;x<d_kmean.getCentroids().size();x++){
+        painter.setPen(d_kmean.getCentroids()[x]->getColor());
+        for(int y=0;y<d_kmean.getCentroids()[x]->getPoints().size()-1;y++){
+            QPoint p1=QPoint(d_kmean.getCentroids()[x]->getPoints()[y]->getX(),d_kmean.getCentroids()[x]->getPoints()[y]->getY());
+            QPoint p2=QPoint(d_kmean.getCentroids()[x]->getPoints()[y+1]->getX(),d_kmean.getCentroids()[x]->getPoints()[y+1]->getY());
+            painter.drawLine(p1,p2);
+        }
+    }
+}
+
+
+bool Widget::centroidsAreDifferent(const vector<vector<Position>>&v1,const vector<vector<Position>>&v2){
+    for(int x=0;x<v1.size();x++){
+        for(int y=0;y<v1[x].size();y++){
+            if(!(v1[x][y]==v2[x][y]))return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * This cent should have the same size with the current centroid!
+ * @param cent
+ * @return
+ */
+bool Widget::centroidsAreDifferent(vector<Centroid*>cent)const{
+    for(int x=0;x<d_kmean.getCentroids().size();x++){
+        if(!(d_kmean.getCentroids() == cent)){
+            cout<<"They are different"<<endl;
+            return true;
+        }else{
+            cout<<"Old kmean.C["<<x<<"] = ("<<cent[x]->getX()<<","<<cent[x]->getY()<<") --> ";
+            cout<<" ("<< d_kmean.getCentroids()[x]->getX()<<","<<d_kmean.getCentroids()[x]->getY()<<")"<<endl;
+        }
+    }
+    cout<<"They are the same"<<endl;
+    cout<<endl<<endl;
+    return false;
 }
 QSize Widget::sizeHint() const {
     QSize widgetSize(800, 600);
     return widgetSize;
 }
 void Widget::onReset() {
-
+    //eraseDate();
+    d_kmean.init();
+    init();
+    updateInfosLabel();
+    update();
 }
 void Widget::associatePositionsToCentroids() {
     // Clear the points associated with each centroid
@@ -119,3 +185,10 @@ void Widget::associatePositionsToCentroids() {
     //infos->setText("");
 }
 
+void Widget::eraseDate(){
+    playBtn=nullptr;
+    resetBtn=nullptr;
+    mainLayout=nullptr;
+    buttonLayout=nullptr;
+    infos=nullptr;
+}

@@ -13,6 +13,11 @@ The K-Means Clustering algorithm is a popular unsupervised machine learning tech
 - Adjustable number of clusters.
 - Easy-to-use interface for exploring K-Means clustering.
 
+### Watch a Video
+
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=fnh8xBaM--M" frameborder="0" allowfullscreen></iframe>
+
+
 ## Classes
 
 ### `KMean`

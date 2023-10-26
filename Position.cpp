@@ -53,3 +53,6 @@ const QColor &Position::getColor() const {
 void Position::setColor(const QColor &color) {
     Position::color = color;
 }
+bool Position::operator==(const Position& other) const {
+    return (x == other.x) && (y == other.y);
+}

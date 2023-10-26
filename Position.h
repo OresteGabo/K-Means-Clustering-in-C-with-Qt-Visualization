@@ -33,6 +33,8 @@ public:
     double distanceTo(const Position& other) const;
     static Position generateRandomPosition(int maxWidth=800, int maxHeight=600);
     static int getRandomNumber(int min, int max);
+    bool operator==(const Position& other) const;
+
 private:
     int x;
     int y;
